@@ -1,1 +1,68 @@
+name: CI/CD Pipeline for Flask App
 
+on:
+  push:
+    branches:
+      - main
+      - staging
+  release:
+    types: [created]   # runs on new GitHub release/tag
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'  # or 3.10 depending on app
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest -q --maxfail=1 --disable-warnings
+
+      - name: Build app
+        run: |
+          echo "Building Flask app..."
+          # placeholder: e.g. docker build -t flask-app .
+
+  deploy-staging:
+    needs: build-test
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Staging
+        run: |
+          echo "Deploying to staging environment..."
+          # Example: use SSH to copy files to staging server
+          # scp -i ${{ secrets.STAGING_SSH_KEY }} -r . user@staging-server:/apps/flask
+          # ssh -i ${{ secrets.STAGING_SSH_KEY }} user@staging-server "sudo systemctl restart flaskapp"
+
+  deploy-production:
+    needs: build-test
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production environment..."
+          # Example: Docker + cloud provider or SSH
+          # scp -i ${{ secrets.PROD_SSH_KEY }} -r . user@prod-server:/apps/flask
+          # ssh -i ${{ secrets.PROD_SSH_KEY }} user@prod-server "sudo systemctl restart flaskapp"
