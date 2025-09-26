@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5   
         with:
           python-version: '3.11'
 
@@ -34,7 +34,7 @@ jobs:
           tar -czf flask_app.tar.gz *
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   
         with:
           name: flask_app
           path: flask_app.tar.gz
@@ -45,12 +45,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  
         with:
           name: flask_app
 
       - name: Deploy to Staging EC2
-        uses: appleboy/ssh-action@v0.1.10
+        uses: appleboy/ssh-action@v1.2.0   
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USER }}
@@ -60,6 +60,7 @@ jobs:
             tar -xzf flask_app.tar.gz -C ~/flask-staging
             cd ~/flask-staging
             python3 -m venv venv
+            ./venv/bin/pip install --upgrade pip
             ./venv/bin/pip install -r requirements.txt
             nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
 
@@ -69,12 +70,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  
         with:
           name: flask_app
 
       - name: Deploy to Production EC2
-        uses: appleboy/ssh-action@v0.1.10
+        uses: appleboy/ssh-action@v1.2.0  
         with:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USER }}
@@ -84,5 +85,6 @@ jobs:
             tar -xzf flask_app.tar.gz -C ~/flask-prod
             cd ~/flask-prod
             python3 -m venv venv
+            ./venv/bin/pip install --upgrade pip
             ./venv/bin/pip install -r requirements.txt
             nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
