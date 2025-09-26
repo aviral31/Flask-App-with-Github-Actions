@@ -1,68 +1,89 @@
-name: CI/CD Pipeline for Flask App
+name: Flask CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main
-      - staging
+      - staging   # Deploy to staging on pushes
+      - main      # Only build & test on main push
   release:
-    types: [created]   # runs on new GitHub release/tag
+    types: [published]  # Deploy to production on new release
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.11'  # or 3.10 depending on app
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+         sudo apt update
+         sudo apt install -y python3-pip
+         sudo pip install -r requirements.txt
 
       - name: Run tests
-        run: |
-          pytest -q --maxfail=1 --disable-warnings
+        run: pytest
 
-      - name: Build app
+      - name: Build (package app)
         run: |
           echo "Building Flask app..."
-          # placeholder: e.g. docker build -t flask-app .
+          tar -czf flask_app.tar.gz *
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: flask_app
+          path: flask_app.tar.gz
 
   deploy-staging:
     needs: build-test
     if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: flask_app
 
-      - name: Deploy to Staging
-        run: |
-          echo "Deploying to staging environment..."
-          # Example: use SSH to copy files to staging server
-          # scp -i ${{ secrets.STAGING_SSH_KEY }} -r . user@staging-server:/apps/flask
-          # ssh -i ${{ secrets.STAGING_SSH_KEY }} user@staging-server "sudo systemctl restart flaskapp"
+      - name: Deploy to Staging EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            mkdir -p ~/flask-staging
+            tar -xzf flask_app.tar.gz -C ~/flask-staging
+            cd ~/flask-staging
+            python3 -m venv venv
+            ./venv/bin/pip install -r requirements.txt
+            nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
 
   deploy-production:
     needs: build-test
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: flask_app
 
-      - name: Deploy to Production
-        run: |
-          echo "Deploying to production environment..."
-          # Example: Docker + cloud provider or SSH
-          # scp -i ${{ secrets.PROD_SSH_KEY }} -r . user@prod-server:/apps/flask
-          # ssh -i ${{ secrets.PROD_SSH_KEY }} user@prod-server "sudo systemctl restart flaskapp"
+      - name: Deploy to Production EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            mkdir -p ~/flask-prod
+            tar -xzf flask_app.tar.gz -C ~/flask-prod
+            cd ~/flask-prod
+            python3 -m venv venv
+            ./venv/bin/pip install -r requirements.txt
+            nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
