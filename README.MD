@@ -39,7 +39,7 @@ Before running the workflow, ensure the following are ready:
 ## 🏗️ Workflow File
 
 The GitHub Actions workflow is located at:
-.github/workflows/ci-cd.yml
+.github/workflows/main.yml
 
 markdown
 Copy code
@@ -88,9 +88,6 @@ Copy code
 │ └── main.yml # GitHub Actions workflow
 └── README.md # Project documentation
 
-yaml
-Copy code
-
 ---
 
 ## 🚀 Running Locally (Optional)
@@ -103,17 +100,19 @@ pytest
 python flask_app.py
 Visit: http://127.0.0.1:5000
 
+---
 📸 Screenshots
 Please replace the placeholders below with your actual workflow run screenshots:
-
+ ![Image Alt](image_url)
 Workflow Overview (CI/CD pipeline run)
-
+ ![Image Alt](image_url)
 Build & Test stage success
-
+ ![Image Alt](image_url)
 Deploy to Staging success
-
+ ![Image Alt](image_url)
 Deploy to Production success (on Release)
 
+---
 🎯 Conclusion
 This project demonstrates how to implement a GitHub Actions CI/CD pipeline for a Flask application with:
 
