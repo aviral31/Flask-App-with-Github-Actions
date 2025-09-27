@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          sudo apt install -y python3-pip
           pip install -r requirements.txt
 
       - name: Run tests
@@ -34,7 +34,7 @@ jobs:
           tar -czf flask_app.tar.gz *
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4   
+        uses: actions/upload-artifact@v4
         with:
           name: flask_app
           path: flask_app.tar.gz
@@ -49,20 +49,45 @@ jobs:
         with:
           name: flask_app
 
+      - name: Copy files to Staging EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: flask_app.tar.gz
+          target: /home/ubuntu/
+
       - name: Deploy to Staging EC2
         uses: appleboy/ssh-action@v1.2.0   
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: 22
           script: |
             mkdir -p ~/flask-staging
             tar -xzf flask_app.tar.gz -C ~/flask-staging
             cd ~/flask-staging
+            sudo apt-get update -y
+            sudo apt-get install -y python3-venv
             python3 -m venv venv
             ./venv/bin/pip install --upgrade pip
             ./venv/bin/pip install -r requirements.txt
             nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+
+      - name: Verify Flask App on Staging
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            ps aux | grep flask_app.py
+            sleep 15
+            curl http://localhost:5000
 
   deploy-production:
     needs: build-test
@@ -74,17 +99,42 @@ jobs:
         with:
           name: flask_app
 
+      - name: Copy files to Production EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: flask_app.tar.gz
+          target: /home/ubuntu/
+
       - name: Deploy to Production EC2
         uses: appleboy/ssh-action@v1.2.0  
         with:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: 22
           script: |
             mkdir -p ~/flask-prod
             tar -xzf flask_app.tar.gz -C ~/flask-prod
             cd ~/flask-prod
+            sudo apt-get update -y
+            sudo apt-get install -y python3-venv
             python3 -m venv venv
             ./venv/bin/pip install --upgrade pip
             ./venv/bin/pip install -r requirements.txt
             nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+
+      - name: Verify Flask App on Production
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            ps aux | grep flask_app.py
+            sleep 15
+            curl http://localhost:5000
