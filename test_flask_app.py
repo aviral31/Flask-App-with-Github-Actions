@@ -11,7 +11,7 @@ def test_home(client):
     """Test the home route"""
     response = client.get('/')
     assert response.status_code == 200
-    assert b"Hello, Jenkins CI/CD!" in response.data
+    assert b"Hello, Github Actions CI/CD!" in response.data
 
 def test_add(client):
     """Test the add route"""
