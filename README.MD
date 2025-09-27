@@ -41,9 +41,6 @@ Before running the workflow, ensure the following are ready:
 The GitHub Actions workflow is located at:
 .github/workflows/main.yml
 
-markdown
-Copy code
-
 ### Key Workflow Steps
 1. **Checkout code**  
    Uses the official `actions/checkout@v3`.
@@ -80,7 +77,7 @@ Copy code
 ---
 
 ## 📂 Repository Structure
-
+```
 ├── flask_app.py # Main Flask application
 ├── requirements.txt # Python dependencies
 ├── test_flask_app.py # Unit tests (pytest)
@@ -88,7 +85,7 @@ Copy code
 │ └── workflows/
 │ └── main.yml # GitHub Actions workflow
 └── README.md # Project documentation
-
+```
 ---
 
 ## 🚀 Running Locally (Optional)
