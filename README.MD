@@ -113,7 +113,7 @@ Visit: http://127.0.0.1:5000
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss13.png)
 2.**Workflow Overview (CI/CD pipeline)**
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss1.png)
-3.** Build & Test stage success **
+3.**Build & Test stage success**
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss2.png)
 4.**Deploy to Staging success**
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss3.png)
