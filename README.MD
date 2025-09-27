@@ -22,8 +22,8 @@ Before running the workflow, ensure the following are ready:
     - `main` → stable production-ready code.
 
 - **Two AWS EC2 instances**
-  - **Staging EC2** (smaller instance, e.g., t2.micro).  
-  - **Production EC2** (larger, e.g., t2.small or higher).  
+  - **Staging EC2**   
+  - **Production EC2**   
   - Both must have:
     - Python 3 and `venv` installed.
     - Security group allowing SSH (port 22) and Flask app port (default: 5000).
