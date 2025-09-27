@@ -53,14 +53,20 @@ jobs:
           ls -al
           whoami
           pwd
-      
+      - name: copy files to EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: ./
+          target: /home/ubuntu    
       - name: Deploy to Staging EC2
         uses: appleboy/ssh-action@v1.2.0   
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: 22
           script: |
             sudo mkdir -p ~/flask-staging
             sudo tar -xzf flask_app.tar.gz -C ~/flask-staging
@@ -84,7 +90,14 @@ jobs:
           ls -al
           whoami
           pwd
-      
+      - name: copy files to EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: ./
+          target: /home/ubuntu       
 
       - name: Deploy to Production EC2
         uses: appleboy/ssh-action@v1.2.0  
@@ -92,7 +105,6 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: 22
           script: |
             sudo mkdir -p ~/flask-prod
             sudo tar -xzf flask_app.tar.gz -C ~/flask-prod
