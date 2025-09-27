@@ -132,4 +132,3 @@ Branch-based deployments (Staging vs Production).
 Secure deployments to EC2 using GitHub Secrets.
 
 The setup ensures reliable, automated deployments with minimal manual intervention.
----
