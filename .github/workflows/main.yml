@@ -22,10 +22,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-              sudo apt update
-              sudo apt upgrade
-              sudo apt install -y python3-pip
-              sudo pip install -r requirements.txt  # Install dependencies from requirements.txt.
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r requirements.txt
 
       - name: Run tests
         run: pytest
@@ -51,12 +50,6 @@ jobs:
         with:
           name: flask_app
 
-      - name: Run some commands
-        run: |
-          ls -al
-          whoami
-          pwd
-
       - name: Copy files to Staging EC2
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -75,13 +68,27 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-             mkdir -p ~/flask-staging
-             tar -xzf flask_app.tar.gz -C ~/flask-staging
-             cd ~/flask-staging
-             python3 -m venv venv
-             ./venv/bin/pip install --upgrade pip
-             ./venv/bin/pip install -r requirements.txt
-             nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+            mkdir -p ~/flask-staging
+            tar -xzf flask_app.tar.gz -C ~/flask-staging
+            cd ~/flask-staging
+            sudo apt-get update -y
+            sudo apt-get install -y python3-venv
+            python3 -m venv venv
+            ./venv/bin/pip install --upgrade pip
+            ./venv/bin/pip install -r requirements.txt
+            nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+
+      - name: Verify Flask App on Staging
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            ps aux | grep flask_app.py
+            sleep 15
+            curl -I http://localhost:5000 || echo "Flask app not reachable"
 
   deploy-production:
     needs: build-test
@@ -92,12 +99,6 @@ jobs:
         uses: actions/download-artifact@v4  
         with:
           name: flask_app
-
-      - name: Run some commands
-        run: |
-          ls -al
-          whoami
-          pwd
 
       - name: Copy files to Production EC2
         uses: appleboy/scp-action@v0.1.7
@@ -117,10 +118,24 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-             mkdir -p ~/flask-prod
-             tar -xzf flask_app.tar.gz -C ~/flask-prod
-             cd ~/flask-prod
-             python3 -m venv venv
-             ./venv/bin/pip install --upgrade pip
-             ./venv/bin/pip install -r requirements.txt
-             nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+            mkdir -p ~/flask-prod
+            tar -xzf flask_app.tar.gz -C ~/flask-prod
+            cd ~/flask-prod
+            sudo apt-get update -y
+            sudo apt-get install -y python3-venv
+            python3 -m venv venv
+            ./venv/bin/pip install --upgrade pip
+            ./venv/bin/pip install -r requirements.txt
+            nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+
+      - name: Verify Flask App on Production
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            ps aux | grep flask_app.py
+            sleep 15
+            curl -I http://localhost:5000 || echo "Flask app not reachable"
