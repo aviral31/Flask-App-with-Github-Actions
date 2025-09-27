@@ -87,7 +87,7 @@ jobs:
           script: |
             ps aux | grep flask_app.py
             sleep 15
-            curl -I http://localhost:5000 || echo "Flask app not reachable"
+            curl http://localhost:5000
 
   deploy-production:
     needs: build-test
@@ -137,4 +137,4 @@ jobs:
           script: |
             ps aux | grep flask_app.py
             sleep 15
-            curl -I http://localhost:5000 || echo "Flask app not reachable"
+            curl http://localhost:5000
