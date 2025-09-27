@@ -101,30 +101,29 @@ pip install -r requirements.txt
 pytest
 python flask_app.py
 Visit: http://127.0.0.1:5000
-
----
+```
 ## 📸 Screenshots
 
-Github Actions file
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss8.png)
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss9.png)
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss10.png)
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss11.png)
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss12.png)
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss13.png)
-Workflow Overview (CI/CD pipeline)
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss1.png)
-Build & Test stage success
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss2.png)
-Deploy to Staging success
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss3.png)
- ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss4.png)
-Deploy to Production success (on Release)
-![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss5.png)
-![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss6.png)
-![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss7.png)
-Flask App
-![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss14.png)
+1.**Github Actions file**
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss8.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss9.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss10.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss11.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss12.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss13.png)
+2.**Workflow Overview (CI/CD pipeline)**
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss1.png)
+3.** Build & Test stage success **
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss2.png)
+4.**Deploy to Staging success**
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss3.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss4.png)
+5.**Deploy to Production success (on Release)**
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss5.png)
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss6.png)
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss7.png)
+6.**Flask App**
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss14.png)
 ---
 🎯 Conclusion
 This project demonstrates how to implement a GitHub Actions CI/CD pipeline for a Flask application with:
@@ -136,3 +135,4 @@ Branch-based deployments (Staging vs Production).
 Secure deployments to EC2 using GitHub Secrets.
 
 The setup ensures reliable, automated deployments with minimal manual intervention.
+---
