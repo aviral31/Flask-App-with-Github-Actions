@@ -80,6 +80,7 @@ Copy code
 ---
 
 ## 📂 Repository Structure
+
 ├── flask_app.py # Main Flask application
 ├── requirements.txt # Python dependencies
 ├── test_flask_app.py # Unit tests (pytest)
@@ -91,6 +92,7 @@ Copy code
 ---
 
 ## 🚀 Running Locally (Optional)
+
 You can test the app locally before pushing:
 ```bash
 python3 -m venv venv
@@ -101,17 +103,28 @@ python flask_app.py
 Visit: http://127.0.0.1:5000
 
 ---
-📸 Screenshots
-Please replace the placeholders below with your actual workflow run screenshots:
- ![Image Alt](image_url)
-Workflow Overview (CI/CD pipeline run)
- ![Image Alt](image_url)
-Build & Test stage success
- ![Image Alt](image_url)
-Deploy to Staging success
- ![Image Alt](image_url)
-Deploy to Production success (on Release)
+## 📸 Screenshots
 
+Github Actions file
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss8.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss9.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss10.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss11.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss12.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss13.png)
+Workflow Overview (CI/CD pipeline)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss1.png)
+Build & Test stage success
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss2.png)
+Deploy to Staging success
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss3.png)
+ ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss4.png)
+Deploy to Production success (on Release)
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss5.png)
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss6.png)
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss7.png)
+Flask App
+![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/main/ss14.png)
 ---
 🎯 Conclusion
 This project demonstrates how to implement a GitHub Actions CI/CD pipeline for a Flask application with:
