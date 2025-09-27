@@ -122,13 +122,10 @@ Visit: http://127.0.0.1:5000
 6.**Flask App**
 ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss14.png)
 ---
-🎯 Conclusion
+## 🎯 Conclusion
+
 This project demonstrates how to implement a GitHub Actions CI/CD pipeline for a Flask application with:
-
 Automated builds and tests.
-
 Branch-based deployments (Staging vs Production).
-
 Secure deployments to EC2 using GitHub Secrets.
-
 The setup ensures reliable, automated deployments with minimal manual intervention.
