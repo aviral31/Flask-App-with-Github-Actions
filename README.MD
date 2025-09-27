@@ -31,7 +31,7 @@ Before running the workflow, ensure the following are ready:
 - **GitHub Secrets (Repo → Settings → Secrets and variables → Actions)**
   - `STAGING_HOST` → Public IP/DNS of Staging EC2.
   - `PROD_HOST` → Public IP/DNS of Production EC2.
-  - `EC2_USER` → Username for EC2 (`ubuntu` for Ubuntu AMI, `ec2-user` for Amazon Linux).
+  - `EC2_USER` → Username for EC2 (`ubuntu` for Ubuntu AMI).
   - `SSH_KEY` → Private SSH key (corresponding to public key in EC2 `~/.ssh/authorized_keys`).
 
 ---
@@ -85,7 +85,7 @@ Copy code
 ├── test_flask_app.py # Unit tests (pytest)
 ├── .github/
 │ └── workflows/
-│ └── ci-cd.yml # GitHub Actions workflow
+│ └── main.yml # GitHub Actions workflow
 └── README.md # Project documentation
 
 yaml
@@ -113,19 +113,6 @@ Build & Test stage success
 Deploy to Staging success
 
 Deploy to Production success (on Release)
-
-✅ Deliverables
-GitHub Repository with:
-
-Flask app code.
-
-.github/workflows/ci-cd.yml.
-
-Updated README.md.
-
-Configured Secrets in GitHub Actions.
-
-Screenshots of successful workflow runs.
 
 🎯 Conclusion
 This project demonstrates how to implement a GitHub Actions CI/CD pipeline for a Flask application with:
