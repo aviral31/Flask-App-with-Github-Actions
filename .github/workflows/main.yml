@@ -54,15 +54,6 @@ jobs:
           whoami
           pwd
       
-      - name: copy files to EC2
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.STAGING_HOST }}
-          username: ${{ secrets.STAGING_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          source: ./
-          target: /home/ubuntu
       - name: Deploy to Staging EC2
         uses: appleboy/ssh-action@v1.2.0   
         with:
@@ -94,15 +85,7 @@ jobs:
           whoami
           pwd
       
-      - name: copy files to EC2
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.PROD_HOST }}
-          username: ${{ secrets.PROD_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          source: ./
-          target: /home/ubuntu
+
       - name: Deploy to Production EC2
         uses: appleboy/ssh-action@v1.2.0  
         with:
