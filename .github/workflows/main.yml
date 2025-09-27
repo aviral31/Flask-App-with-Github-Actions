@@ -22,8 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          sudo python -m pip install --upgrade pip
+          sudo pip install -r requirements.txt
 
       - name: Run tests
         run: pytest
@@ -73,13 +73,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            mkdir -p ~/flask-staging
-            tar -xzf flask_app.tar.gz -C ~/flask-staging
-            cd ~/flask-staging
-            python3 -m venv venv
-            ./venv/bin/pip install --upgrade pip
-            ./venv/bin/pip install -r requirements.txt
-            nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+            sudo mkdir -p ~/flask-staging
+            sudo tar -xzf flask_app.tar.gz -C ~/flask-staging
+            sudo cd ~/flask-staging
+            sudo python3 -m venv venv
+            sudo ./venv/bin/pip install --upgrade pip
+            sudo ./venv/bin/pip install -r requirements.txt
+            sudo nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
 
   deploy-production:
     needs: build-test
@@ -115,10 +115,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            mkdir -p ~/flask-prod
-            tar -xzf flask_app.tar.gz -C ~/flask-prod
-            cd ~/flask-prod
-            python3 -m venv venv
-            ./venv/bin/pip install --upgrade pip
-            ./venv/bin/pip install -r requirements.txt
-            nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
+            sudo mkdir -p ~/flask-prod
+            sudo tar -xzf flask_app.tar.gz -C ~/flask-prod
+            sudo cd ~/flask-prod
+            sudo python3 -m venv venv
+            sudo ./venv/bin/pip install --upgrade pip
+            sudo ./venv/bin/pip install -r requirements.txt
+            sudo nohup ./venv/bin/python flask_app.py > app.log 2>&1 &
