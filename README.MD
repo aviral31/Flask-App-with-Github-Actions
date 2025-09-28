@@ -101,21 +101,21 @@ Visit: http://127.0.0.1:5000
 ```
 ## 📸 Screenshots
 
-1.**Github Actions file**
+1.*Github Actions file*
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss8.png)
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss9.png)
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss10.png)
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss11.png)
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss12.png)
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss13.png)
-2.**Workflow Overview (CI/CD pipeline)**
+2.*Workflow Overview (CI/CD pipeline)*
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss1.png)
-3.**Build & Test stage success**
+3.*Build & Test stage success*
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss2.png)
-4.**Deploy to Staging success**
+4.*Deploy to Staging success*
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss3.png)
  ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss4.png)
-5.**Deploy to Production success (on Release)**
+5.*Deploy to Production success (on Release)*
 ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss5.png)
 ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss6.png)
 ![Image Alt](https://github.com/aviral31/Flask-App-with-Github-Actions/blob/0175f5b6b920384dc50d3089a26d5377a1660ae5/ss7.png)
